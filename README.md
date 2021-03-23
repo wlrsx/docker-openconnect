@@ -12,9 +12,9 @@ This container is an automated build linked to [alpine](https://hub.docker.com/_
 [Source](https://gitlab.com/ocserv/ocserv)
 
 # Docker Features
-* Base: Alpine Edge
-* Latest OpenConnect Server 0.11.10
-* Size: 57.1MB 
+* Base: Alpine 3.13
+* Latest OpenConnect Server 1.1.2
+* Size: 305MB 
 * Modification of the listening port for more networking versatility
 * Customizing the DNS servers used for queries over the VPN
 * Supports tunneling all traffic over the VPN or tunneling only specific routes via split-include

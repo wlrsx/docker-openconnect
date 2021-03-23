@@ -32,12 +32,8 @@ RUN export OC_VERSION=$(curl --silent "https://ocserv.gitlab.io/www/changelog.ht
 RUN mkdir -p /usr/src/ocserv
 RUN tar -xf ocserv.tar.xz -C /usr/src/ocserv --strip-components=1
 RUN rm ocserv.tar.xz*
-RUN cd /usr/src/ocserv
-RUN ./configure
-RUN make
-RUN make install
-RUN cd /
-RUN rm -fr /usr/src/ocserv
+RUN cd /usr/src/ocserv && ls -al && ./configure && make && make install
+RUN cd / && rm -rf /usr/src/ocserv
 RUN runDeps="$( \
 		scanelf --needed --nobanner /usr/local/sbin/ocserv \
 			| awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \

@@ -29,15 +29,15 @@ RUN export OC_VERSION=$(curl --silent "https://ocserv.gitlab.io/www/changelog.ht
 	&& curl -SL "ftp://ftp.infradead.org/pub/ocserv/ocserv-$OC_VERSION.tar.xz" -o ocserv.tar.xz \
 	&& curl -SL "ftp://ftp.infradead.org/pub/ocserv/ocserv-$OC_VERSION.tar.xz.sig" -o ocserv.tar.xz.sig
 	
-RUN mkdir -p /usr/src/ocserv \
-	&& tar -xf ocserv.tar.xz -C /usr/src/ocserv --strip-components=1 \
-	&& rm ocserv.tar.xz* \
-	&& cd /usr/src/ocserv \
-	&& ./configure \
-	&& make \
-	&& make install \
-	&& cd / \
-	&& rm -fr /usr/src/ocserv
+RUN mkdir -p /usr/src/ocserv
+RUN tar -xf ocserv.tar.xz -C /usr/src/ocserv --strip-components=1
+RUN rm ocserv.tar.xz*
+RUN cd /usr/src/ocserv
+RUN ./configure
+RUN make
+RUN make install
+RUN cd /
+RUN rm -fr /usr/src/ocserv
 RUN runDeps="$( \
 		scanelf --needed --nobanner /usr/local/sbin/ocserv \
 			| awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \

@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.7
 
 MAINTAINER MarkusMcNugen
 # Forked from TommyLau for unRAID
@@ -31,7 +31,6 @@ RUN mkdir -p /usr/src/ocserv
 RUN tar -xf ocserv.tar.xz -C /usr/src/ocserv --strip-components=1
 RUN rm ocserv.tar.xz*
 WORKDIR /usr/src/ocserv
-RUN sed -i '4d' ./configure.ac
 RUN ./configure
 RUN make 
 RUN make install

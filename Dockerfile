@@ -24,14 +24,15 @@ RUN buildDeps=" \
 		xz \
 	"; \
 	set -x \
-	&& apk add --update --virtual .build-deps $buildDeps \
-	&& export OC_VERSION=$(curl --silent "https://ocserv.gitlab.io/www/changelog.html" 2>&1 | grep -m 1 'Version' | awk '/Version/ {print $2}') \
+	&& apk add --update --virtual .build-deps $buildDeps
+RUN export OC_VERSION=$(curl --silent "https://ocserv.gitlab.io/www/changelog.html" 2>&1 | grep -m 1 'Version' | awk '/Version/ {print $2}') \
 	&& curl -SL "ftp://ftp.infradead.org/pub/ocserv/ocserv-$OC_VERSION.tar.xz" -o ocserv.tar.xz \
-	&& curl -SL "ftp://ftp.infradead.org/pub/ocserv/ocserv-$OC_VERSION.tar.xz.sig" -o ocserv.tar.xz.sig \
-	&& gpg --keyserver pool.sks-keyservers.net --recv-key 7F343FA7 \
+	&& curl -SL "ftp://ftp.infradead.org/pub/ocserv/ocserv-$OC_VERSION.tar.xz.sig" -o ocserv.tar.xz.sig
+	
+RUN gpg --keyserver pool.sks-keyservers.net --recv-key 7F343FA7 \
 	&& gpg --keyserver pool.sks-keyservers.net --recv-key 96865171 \
-	&& gpg --verify ocserv.tar.xz.sig \
-	&& mkdir -p /usr/src/ocserv \
+	&& gpg --verify ocserv.tar.xz.sig 
+RUN mkdir -p /usr/src/ocserv \
 	&& tar -xf ocserv.tar.xz -C /usr/src/ocserv --strip-components=1 \
 	&& rm ocserv.tar.xz* \
 	&& cd /usr/src/ocserv \
@@ -39,8 +40,8 @@ RUN buildDeps=" \
 	&& make \
 	&& make install \
 	&& cd / \
-	&& rm -fr /usr/src/ocserv \
-	&& runDeps="$( \
+	&& rm -fr /usr/src/ocserv
+RUN runDeps="$( \
 		scanelf --needed --nobanner /usr/local/sbin/ocserv \
 			| awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
 			| xargs -r apk info --installed \
@@ -51,6 +52,7 @@ RUN buildDeps=" \
 	&& rm -rf /var/cache/apk/* 
 
 RUN apk add --update bash rsync ipcalc sipcalc ca-certificates rsyslog logrotate runit
+RUN update-ca-certificates
 
 ADD ocserv /etc/default/ocserv
 

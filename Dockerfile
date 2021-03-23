@@ -31,7 +31,8 @@ RUN mkdir -p /usr/src/ocserv
 RUN tar -xf ocserv.tar.xz -C /usr/src/ocserv --strip-components=1
 RUN rm ocserv.tar.xz*
 WORKDIR /usr/src/ocserv
-RUN ./configure MKDIR_P="mkdir -p"
+RUN sed -i '4d' ./configure.ac
+RUN ./configure
 RUN make 
 RUN make install
 WORKDIR / 

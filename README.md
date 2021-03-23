@@ -8,7 +8,9 @@ OpenConnect VPN server is an SSL VPN server that is secure, small, fast and conf
 This container is an automated build linked to [alpine](https://hub.docker.com/_/alpine/). The dockerfile was written to always download and compile the latest release of OpenConnect VPN server when built. 
 
 [Homepage](https://ocserv.gitlab.io/www/platforms.html)
+
 [Documentation](https://ocserv.gitlab.io/www/manual.html)
+
 [Source](https://gitlab.com/ocserv/ocserv)
 
 # Docker Features

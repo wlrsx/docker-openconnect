@@ -15,13 +15,21 @@ RUN buildDeps=" \
 		krb5-dev \
 		libev-dev \
 		libnl3-dev \
+		libproxy \
 		libseccomp-dev \
+		libtasn1 \
 		linux-headers \
 		linux-pam-dev \
 		lz4-dev \
 		make \
+		oath-toolkit-libpskc \
+		p11-kit \
+		pcsc-lite-libs \
 		readline-dev \
+		scanelf \
+		stoken-dev \
 		tar \
+		tpm2-tss-esys \
 		xz \
 	"; \
 	set -x \
@@ -50,7 +58,9 @@ RUN buildDeps=" \
 	&& apk del .build-deps \
 	&& rm -rf /var/cache/apk/* 
 
-RUN apk add --update bash rsync ipcalc sipcalc ca-certificates rsyslog logrotate runit
+RUN apk add --update bash rsync ipcalc sipcalc ca-certificates rsyslog logrotate runit \
+	&& rm -rf /var/cache/apk/* 
+	
 RUN update-ca-certificates
 
 ADD ocserv /etc/default/ocserv

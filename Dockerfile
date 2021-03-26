@@ -14,6 +14,7 @@ RUN buildDeps=" \
 		gnutls-dev \
 		gpgme \
 		krb5-dev \
+		libc-dev \
 		libev-dev \
 		libnl3-dev \
 		libproxy \

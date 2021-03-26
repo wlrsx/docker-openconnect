@@ -126,11 +126,6 @@ After a user successfully logins to the VPN a message will be logged in the dock
 [info] User markusmcnugen Disconnected - Bytes In: 175856 Bytes Out: 4746819 Duration:63
 ```
 
-# Issues
-If you are having issues with this container please submit an issue on GitHub.
-Please provide logs, docker version and other information that can simplify reproducing the issue.
-Using the latest stable verison of Docker is always recommended. Support for older version is on a best-effort basis.
-
 # Building the container yourself
 To build this container, clone the repository and cd into it.
 

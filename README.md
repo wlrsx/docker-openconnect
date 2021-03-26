@@ -18,7 +18,7 @@ The dockerfile was written to always download and compile the latest release of 
 # Docker Features
 * Base: Alpine 3.13
 * Latest OpenConnect Server 1.1.2
-* Size: 305MB 
+* Size: 63.6MB 
 * Modification of the listening port for more networking versatility
 * Customizing the DNS servers used for queries over the VPN
 * Supports tunneling all traffic over the VPN or tunneling only specific routes via split-include

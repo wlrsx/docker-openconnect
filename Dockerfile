@@ -52,16 +52,19 @@ RUN buildDeps=" \
 	&& make install \
 	&& cd / \
 	&& rm -rf /usr/src/ocserv \
-	&& apk del .build-deps \
 	&& runDeps="$( \
 			scanelf --needed --nobanner /usr/local/sbin/ocserv \
 				| awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
 				| xargs -r apk info --installed \
 				| sort -u \
 			)" \
-	&& apk add --update --virtual .run-deps $runDeps gnutls-utils iptables bash rsync ipcalc sipcalc ca-certificates rsyslog logrotate runit \
+	&& apk add --update --virtual .run-deps $runDeps gnutls-utils iptables \
+	&& apk del .build-deps \
 	&& rm -rf /var/cache/apk/* 
 	
+RUN apk add --update bash rsync ipcalc sipcalc ca-certificates rsyslog logrotate runit \
+	&& rm -rf /var/cache/apk/* 
+
 RUN update-ca-certificates
 
 ADD ocserv /etc/default/ocserv
